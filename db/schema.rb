@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(:version => 20120423110407) do
     t.string   "author"
     t.integer  "page_temp_id"
     t.text     "picture1"
+    t.text     "picture2"
+    t.text     "picture3"
     t.string   "small_title"
   end
 
@@ -169,6 +171,7 @@ ActiveRecord::Schema.define(:version => 20120423110407) do
   create_table "question_result_details", :force => true do |t|
     t.integer  "question_detail_id"
     t.integer  "question_result_id"
+    t.integer  "answer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -182,9 +185,9 @@ ActiveRecord::Schema.define(:version => 20120423110407) do
 
   create_table "questions", :force => true do |t|
     t.string   "name"
+    t.boolean  "flage"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "flage"
   end
 
   create_table "use_permissions", :force => true do |t|

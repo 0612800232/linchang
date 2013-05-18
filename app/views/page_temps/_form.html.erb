@@ -1,6 +1,6 @@
 <%#= javascript_include_tag :ckeditor %>
 <%= javascript_include_tag "prototype" %>
-<div id="page" style="height:500px">
+<div id="page" style="height:800px">
   <!-- Wrapper -->
   <div class="wrapper">
     <!-- Left column/section -->
@@ -36,9 +36,9 @@
 
           <p>
             <label class="required" for="name">模板描述</label><br/>
-            <%= f.text_area :content,:id => "kindeditor" %>
-            <!--
-             <%= f.cktext_area  :content,:input_html => {},:language=>"zh-cn",:cols=>"180"%>-->
+             <%= f.text_area :content,:cols=>"100"%>
+            
+            
           </p>
 
             <p class="box"><input type="submit" class="btn btn-green big" value="提交">  <%= link_to '返回', page_temps_path,:class=>"btn btn-green big" ,:style=>"vertical-align: middle;margin-bottom: 0;"%></p
