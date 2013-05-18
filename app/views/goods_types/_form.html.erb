@@ -1,0 +1,35 @@
+﻿<div id="page" style="height:500px">
+  <!-- Wrapper -->
+  <div class="wrapper">
+    <!-- Left column/section -->
+    <section class="column width6 first">
+
+      <h3>新增/编辑产品种类</h3>
+      <% if @goods_type.errors.any? %>
+        <% @goods_type.errors.full_messages.each do |msg| %>
+          <div class="box box-info"><%=msg%></div>
+        <% end %>
+      <%end%>
+
+      <%= simple_form_for @goods_type do |f| %>
+        <fieldset>
+          <legend>新增/编辑产品分类</legend>
+
+          <p>
+            <label class="required" for="name">产品分类名称</label><br/>
+            <%= f.text_field :name,:class=>"half" %>
+          </p>
+
+         
+          <p class="box"><input type="submit" class="btn btn-green big" value="提交"/>
+            or
+            <input type="reset" class="btn" value="重置"/></p>
+
+        </fieldset>
+
+      <%end%>
+      <%= link_to '返回', goods_types_path %>
+  </div>
+
+  <!-- End of Wrapper -->
+</div>

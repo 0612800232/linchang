@@ -1,0 +1,99 @@
+<%= javascript_include_tag "prototype" %>﻿
+    <script>
+      KindEditor.ready(function(K) {
+        var editor = K.editor({
+          allowFileManager : true, 
+          uploadJson : '/kindeditor/upload',
+          fileManagerJson : '/kindeditor/images_list'
+        });
+        K('#good_url_image').click(function() {
+          editor.loadPlugin('image', function() {
+            editor.plugin.imageDialog({
+              imageUrl : K('#goods_url').val(),
+              clickFn : function(url, title, width, height, border, align) {
+                K('#goods_url').val(url);
+                editor.hideDialog();
+              }
+            });
+          });
+        });
+        
+         K('#good_index_url_image').click(function() {
+          editor.loadPlugin('image', function() {
+            editor.plugin.imageDialog({
+              imageUrl : K('#goods_index_url').val(),
+              clickFn : function(url, title, width, height, border, align) {
+                K('#goods_index_url').val(url);
+                editor.hideDialog();
+              }
+            });
+          });
+        });
+
+             
+
+
+      });
+    </script>
+
+<div id="page" >
+  <!-- Wrapper -->
+  <div class="wrapper">
+    <!-- Left column/section -->
+    <section class="column width6 first">
+
+      <h3>新增/编辑产品</h3>
+      <% if @good.errors.any? %>
+        <% @good.errors.full_messages.each do |msg| %>
+          <div class="box box-info"><%=msg%></div>
+        <% end %>
+      <%end%>
+
+      <%= simple_form_for @good do |f| %>
+        <fieldset>
+          <legend>新增/编辑产品</legend>
+
+          <p>
+            <label class="required" for="name">产品名称</label><br/>
+            <%= f.text_field :name,:class=>"half" %>
+          </p>
+           <p>
+            <label class="required" for="amount">产品金额</label><br/>
+            <%= f.text_field :amount,:class=>"half" %>
+          </p>
+           <p>
+            <label class="required" for="desc">产品描述</label><br/>
+           <%= f.text_area :desc,:cols=>"100",:rows =>"5"%>
+            
+          </p>
+           <p>
+            <label class="required" for="name">产品类型</label><br/>
+             <%= select( :good,:goods_type_id, GoodsType.find(:all).collect {|p| [ p.name, p.id ] }) %>
+          </p>
+           <p><%= f.input :is_new ,:label =>"是否设置为新品"%></p>
+          <p>
+          <input type="text" id="goods_url" value="<%=@good.goods_url%>" name="good[goods_url]"/> <input type="button" id="good_url_image" value="选择产品图片" />
+        </p>
+         <p><%if @good.goods_url %>
+          <%= image_tag( @good.goods_url,:width=>100)%>
+          <%end%>
+        </p>
+         <p>
+          <input type="text" id="goods_index_url" value="<%=@good.goods_index_url%>" name="good[goods_index_url]"/> <input type="button" id="good_index_url_image" value="选择产品主页图片" />
+        </p>
+         <p><%if @good.goods_index_url %>
+          <%= image_tag( @good.goods_index_url,:width=>100)%>
+          <%end%>
+        </p>
+          <p class="box"><input type="submit" class="btn btn-green big" value="提交"/>
+            or
+            <input type="reset" class="btn" value="重置"/></p>
+
+        </fieldset>
+
+      <%end%>
+      <%= link_to '返回', goods_path %>
+  </div>
+
+  <!-- End of Wrapper -->
+</div>

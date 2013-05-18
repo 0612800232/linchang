@@ -1,0 +1,53 @@
+<div id="page" >
+  <!-- Wrapper -->
+  <div class="wrapper">
+    <!-- Left column/section -->
+    <section class="column width6 first">
+
+      <h3>查看产品</h3>
+
+
+      <fieldset>
+        <legend>查看产品</legend>
+        <p>
+          <label class="required" for="name">产品类别</label><br/>
+          <%= @good.goods_type.name %>
+        </p>
+        <p>
+          <label class="required" for="name">产品名称</label><br/>
+          <%= @good.name %>
+        </p>
+
+        <p>
+          <label class="required" for="name">产品金额</label><br/>
+          <%= @good.amount%>（元）
+        </p>
+        <p>
+          <label class="required">产品描述</label><br>
+          <%= @good.desc%>
+        </p>
+        <p>
+          <label class="required">是否新品推荐</label><br>
+          <%= @good.is_new ? "是":"否"%>
+        </p>
+        <p>
+          <label class="required">产品图片</label><br>
+          <%if @good.goods_url %>
+            <%= image_tag( @good.goods_url,:width=>100)%>
+          <%end%>
+        </p>
+        <p>
+          <label class="required">产品主页图片</label><br>
+          <%if @good.goods_index_url %>
+            <%= image_tag( @good.goods_index_url,:width=>100)%>
+          <%end%>
+        </p>
+      </fieldset>
+
+
+      <%= link_to 'Edit', edit_good_path(@good) %> |
+      <%= link_to 'Back', goods_path %>
+  </div>
+  <!-- End of Wrapper -->
+</div>
+

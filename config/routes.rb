@@ -1,6 +1,17 @@
 Huanhao::Application.routes.draw do
 
 
+  resources :images_indices
+
+  resources :goods do
+     collection do
+        post :add_new
+      end
+  end
+  resources :goods_types
+
+  resources :images_indices
+
   resources :question_result_details
 
   resources :question_results
@@ -42,7 +53,14 @@ match '/homes/forums/:id/:page',
   :controller => 'homes',  
   :action => 'articles',  
   :requirements => {:id=>/\d+/},  
-  :id => nil   
+  :id => nil  
+
+
+ match '/homes/courses/:id',  
+  :controller => 'homes',  
+  :action => 'courses',  
+  :requirements => {:id=>/\d+/},  
+  :id => nil    
 
 match '/homes/forums/:id/',  
   :controller => 'homes',  
@@ -50,10 +68,24 @@ match '/homes/forums/:id/',
   :requirements => {:id=>/\d+/},  
   :id => nil  
 
+  match '/homes/goods/:id/',  
+  :controller => 'homes',  
+  :action => 'goods',  
+  :requirements => {:id=>/\d+/},  
+  :id => nil  
+
+  match '/homes/goods/:id/:page',  
+  :controller => 'homes',  
+  :action => 'goods',  
+  :requirements => {:id=>/\d+/,:page => /\d+/},  
+  :page => nil ,
+  :id => nil  
   resources :events
   resources :homes do
       collection do
+        get :apply
         get :forums
+        get :goods
         get :articles
         get :read
       end
@@ -87,7 +119,11 @@ match '/homes/forums/:id/',
   end
   end
   
-  resources :articles 
+  resources :articles do
+     collection do
+        post :add_index
+      end
+  end
 
 
   get "admin/dashboard"
